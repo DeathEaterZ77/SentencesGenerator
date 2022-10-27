@@ -3,7 +3,7 @@ Groupe 7:
   - Charline BLANC
   - Doriane FAKOREDE
   - Carla GROS-ALCARAZ
- dépôt:
+dépôt:
   - https://github.com/DeathEaterZ77/SentencesGenerator.git
 ---
 # Séance du 27/10/22

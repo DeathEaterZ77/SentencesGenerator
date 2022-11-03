@@ -23,16 +23,16 @@ char extracFF() {
     char genre_nbr_tps[200];
 
     // open the file
-    dico_test = fopen("../dico.txt","r");//open the file
+    dico_test = fopen("../dico.txt","r");
 
     // test if the file is NULL
-    if (dico_test == NULL) {// test if the file is NULL
+    if (dico_test == NULL) {
         printf("Cannot open this file");
         exit(0);
     }
 
     // avoid all the lines that starts with $
-    while(fgets(str,1000,dico_test)!=0 && str[0]=="$"); // read the file while it's not NULL
+    while(fgets(str,1000,dico_test)!=0 && str[0]=="$"); 
     
     nb_lignes_lues = 0;
     

@@ -8,4 +8,8 @@ include_directories(.)
 add_executable(SentencesGenerator
         main.c
         node.c
-        node.h)
+        node.h
+        N-aryCharTree.c
+        N-aryCharTree.h
+        displayTree.c
+        displayTree.h)

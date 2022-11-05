@@ -29,10 +29,11 @@ struct base_node{ // based forms node collection
 typedef struct base_node tbase_node, *pbase_node;
 
 
-// functions implemented
+// implemented functions
 pflech_node createFlechNode(char,char);
 pbase_node createNode(char);
-
+void addNode(pbase_node, char, int);
+void addFlechNode(pbase_node, char, char);
 
 
 

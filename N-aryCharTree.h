@@ -14,7 +14,7 @@ struct n_tree{
 typedef struct n_tree nt_tree, *np_tree;
 
 //implemented functions
-
+nt_tree createEmptyTree();
 
 
 #endif //SENTENCESGENERATOR_N_ARYCHARTREE_H

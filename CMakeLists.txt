@@ -13,3 +13,4 @@ add_executable(SentencesGenerator
         N-aryCharTree.h
         displayTree.c
         displayTree.h)
+

@@ -7,6 +7,7 @@
 // create the node for one inflected word
 pflech_node createFlechNode(char flech_word, char genre_nbr_tps){
     pflech_node new;
+    new = (pflech_node)malloc(sizeof(pflech_node));
     new->flech_word = flech_word;
     new->attributs = genre_nbr_tps;
     new->next = NULL;
@@ -16,6 +17,7 @@ pflech_node createFlechNode(char flech_word, char genre_nbr_tps){
 // create the node for one letter of a based word
 pbase_node createNode(char val){
     pbase_node new;
+    new = (pbase_node)malloc(sizeof(pbase_node));
     new->letter = val;
     new->next = new->son = NULL;
     new->end = 0;
@@ -33,7 +35,7 @@ void addNode(pbase_node prev, char val, int dir){
     }
     else if (dir==1){ // add to son
         prev->son = new;
-        prev->next->depth = prev->depth+1;
+        prev->son->depth = prev->depth+1;
     }
 }
 

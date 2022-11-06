@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stddef.h>
 #include "displayTree.h"
 
 #define INIT_LINES 3
@@ -10,7 +11,7 @@
  *
  */
 
-int _print_t(pbase_node root, int is_left, int offset, int depth, char s[MAX_NB_LINES][LINE_SIZE])
+/*int _print_t(pbase_node root, int is_left, int offset, int depth, char s[MAX_NB_LINES][LINE_SIZE])
 {
     char b[20];
     // variables created by NF
@@ -29,8 +30,8 @@ int _print_t(pbase_node root, int is_left, int offset, int depth, char s[MAX_NB_
     {
         sprintf(b, "[ %c ]", root->letter); // NF
         //T O D O
-        //left = _print_t(root->left, 1, offset, depth + 1, s);
-        //right = _print_t(root->right, 0, offset + left + width, depth + 1, s);
+        left = _print_t(root->son, 1, offset, depth + 1, s);
+        right = _print_t(root->next, 0, offset + left + width, depth + 1, s);
     }
 
     if (!depth)
@@ -117,4 +118,4 @@ void displayTree(nt_tree t)
 {
     print_t(t.root);
 }
-
+*/

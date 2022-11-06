@@ -17,4 +17,11 @@ typedef struct n_tree nt_tree, *np_tree;
 nt_tree createEmptyTree();
 
 
+// to implement functions
+void fillTrees(nt_tree*,nt_tree*,nt_tree*,nt_tree*);
+void addWordToTree(char*, char*, char*, int, nt_tree*);
+
+
+
+
 #endif //SENTENCESGENERATOR_N_ARYCHARTREE_H

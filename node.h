@@ -23,7 +23,7 @@ struct base_node{ // based forms node collection
     char letter;
     struct base_node *sibling, *son;
     int end; // if we reach the end of the based word
-    int depth;
+    int depth; // level in the tree
     pflech_node flechies; // associated inflected forms
 };
 typedef struct base_node tbase_node, *pbase_node;

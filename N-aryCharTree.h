@@ -6,6 +6,9 @@
 #define SENTENCESGENERATOR_N_ARYCHARTREE_H
 
 #include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "node.h"
 
 struct n_tree{
@@ -18,8 +21,8 @@ nt_tree createEmptyTree();
 
 
 // to implement functions
-void fillTrees(nt_tree*,nt_tree*,nt_tree*,nt_tree*);
-void addWordToTree(char*, char*, char*, int, nt_tree*);
+void fill_NTrees(nt_tree*);
+void addWordToTree(char*, char*, char*, nt_tree*);
 
 
 

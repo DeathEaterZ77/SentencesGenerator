@@ -5,11 +5,11 @@
 #include "node.h"
 
 // create the node for one inflected word
-pflech_node createFlechNode(char* flech_word, char* genre_nbr_tps){
+pflech_node createFlechNode(char* flech_word, char* gender_nbr_time){
     pflech_node new;
     new = (pflech_node)malloc(sizeof(pflech_node));
     new->flech_word = flech_word;
-    new->attributs = genre_nbr_tps;
+    new->attributs = gender_nbr_time;
     new->next = NULL;
     return new;
 }
@@ -39,8 +39,8 @@ void addNode(pbase_node prev, char val, int dir){
 }
 
 // create then add the pflech_node at the end of std list "flechies"
-void addFlechNode(pbase_node here, char* flech_word, char* genre_nbr_tps){
-    pflech_node new = createFlechNode(flech_word,genre_nbr_tps);
+void addFlechNode(pbase_node here, char* flech_word, char* gender_nbr_time){
+    pflech_node new = createFlechNode(flech_word,gender_nbr_time);
     if (here->flechies == NULL) here->flechies = new;
     else{
         pflech_node temp = here->flechies->next;

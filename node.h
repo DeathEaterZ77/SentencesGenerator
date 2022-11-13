@@ -24,6 +24,7 @@ struct base_node{ // based forms node collection
     struct base_node *sibling, *son;
     int end; // if we reach the end of the based word
     int depth; // level in the tree
+    int nbsons; // number of sons of this node
     pflech_node flechies; // associated inflected forms
 };
 typedef struct base_node tbase_node, *pbase_node;

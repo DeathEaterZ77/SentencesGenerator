@@ -31,15 +31,19 @@ void addNode(pbase_node prev, char val, int dir){
     pbase_node new = createNode(val);
     if (dir==0){ // add to sibling
         prev->sibling = new;
+        prev->sibling->depth = prev->depth;
     }
     else if (dir==1){ // add to son
         prev->son = new;
         prev->son->depth = prev->depth+1;
+        prev->nbsons++;
     }
 }
 
 // create then add the pflech_node at the end of std list "flechies"
 void addFlechNode(pbase_node here, char* flech_word, char* gender_nbr_time){
+    here->end = 1;
+
     pflech_node new = createFlechNode(flech_word,gender_nbr_time);
     if (here->flechies == NULL) here->flechies = new;
     else{

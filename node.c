@@ -7,9 +7,9 @@
 // create the node for one inflected word
 pflech_node createFlechNode(char* flech_word, char* gender_nbr_time){
     pflech_node new;
-    new = (pflech_node)malloc(sizeof(pflech_node));
-    new->flech_word = flech_word;
-    new->attributs = gender_nbr_time;
+    new = (pflech_node)malloc(sizeof(tflech_node));
+    new->flech_word = flech_word; //(char*)malloc((strlen(flexed_form) + 1) * sizeof(char))
+    new->attributs = gender_nbr_time; // + strcpy ?
     new->next = NULL;
     return new;
 }
@@ -20,8 +20,10 @@ pbase_node createNode(char val){
     new = (pbase_node)malloc(sizeof(tbase_node));
     new->letter = val;
     new->sibling = new->son = NULL;
+    new->basic_form = NULL;
     new->end = 0;
     new->depth = -1;
+    new->nbflech = 0;
     new->flechies = NULL;
     return new;
 }
@@ -41,13 +43,16 @@ void addNode(pbase_node prev, char val, int dir){
 }
 
 // create then add the pflech_node at the end of std list "flechies"
-void addFlechNode(pbase_node here, char* flech_word, char* gender_nbr_time){
+void addFlechNode(pbase_node here, char* basic_form, char* flech_word, char* gender_nbr_time){
     here->end = 1;
+    here->nbflech++;
+    here->basic_form = (char*)malloc(sizeof(char)); // *strlen(basic_form) +1
+    here->basic_form = basic_form; // strcpy ?
 
-    pflech_node new = createFlechNode(flech_word,gender_nbr_time);
+    pflech_node new = createFlechNode(flech_word, gender_nbr_time);
     if (here->flechies == NULL) here->flechies = new;
     else{
-        pflech_node temp = here->flechies->next;
+        pflech_node temp = here->flechies;
         while ( temp->next != NULL){
             temp = temp->next;
         }

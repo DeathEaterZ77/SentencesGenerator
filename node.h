@@ -22,9 +22,11 @@ typedef struct flech_node tflech_node, *pflech_node;
 struct base_node{ // based forms node collection
     char letter;
     struct base_node *sibling, *son;
+    char *basic_form;
     int end; // if we reach the end of the based word
     int depth; // level in the tree
     int nbsons; // number of sons of this node
+    int nbflech; // number of inflexed forms stocked in the node
     pflech_node flechies; // associated inflected forms
 };
 typedef struct base_node tbase_node, *pbase_node;
@@ -34,7 +36,7 @@ typedef struct base_node tbase_node, *pbase_node;
 pflech_node createFlechNode(char*,char*);
 pbase_node createNode(char);
 void addNode(pbase_node, char, int);
-void addFlechNode(pbase_node, char*, char*);
+void addFlechNode(pbase_node, char*, char*, char*);
 
 
 

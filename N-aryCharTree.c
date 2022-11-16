@@ -13,7 +13,7 @@ nt_tree createEmptyTree(){
 
 void fill_NTrees( nt_tree* cat_trees ){
 
-    FILE* dico = fopen("../dico_10_lignes.txt",'r'); // open the file
+    FILE* dico = fopen("../dictionnaire_non_accentue.txt","r"); // open the file
     if (dico == NULL) { // verify if the file is not empty
         printf("Cannot open this file");
         exit(0);
@@ -37,7 +37,8 @@ void fill_NTrees( nt_tree* cat_trees ){
         else if(strcmp(catvalue,"Ver") == 0) cat = 2;
         else if(strcmp(catvalue,"Adv") == 0) cat = 3;
 
-        //appeler "addWordToTree" pour ajouter la ligne à l'arbre
+        // printf("\n%s %s %d %s",basic_form,flech_form,cat,infos);
+        // appeler "addWordToTree" pour ajouter la ligne à l'arbre
         addWordToTree(basic_form, flech_form, gender_nbr_time, &cat_trees[cat]);
 
     }
@@ -79,7 +80,9 @@ void addWordToTree(char* basic_form, char* flech_form, char* gender_nbr_time, nt
    // une fois avoir parcouru tous les caractères, on met le end du noeud courant à 1 (car on est actuellement sur le dernier caractère)
    //on ajoute les formes fléchies dans le noeud courant (donc du dernier caractère) avec la fonction ("addFlechNode")
 
-    addFlechNode(here, flech_form, gender_nbr_time);
+    addFlechNode(here, basic_form, flech_form, gender_nbr_time);
+
+    //printf("\n%s %s %s", here->basic_form,here->flechies->flech_word,here->flechies->attributs);
 
 }
 

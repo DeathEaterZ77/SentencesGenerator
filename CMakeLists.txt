@@ -12,5 +12,7 @@ add_executable(SentencesGenerator
         N-aryCharTree.c
         N-aryCharTree.h
         displayTree.c
-        displayTree.h)
+        displayTree.h
+        automaticgenerator.c
+        automaticgenerator.h)
 

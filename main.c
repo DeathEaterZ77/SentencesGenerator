@@ -1,6 +1,5 @@
 
-#include "N-aryCharTree.h"
-
+#include "automaticgenerator.h"
 
 int main(){
 
@@ -19,6 +18,7 @@ int main(){
     nt_tree cat_trees[4] = {nt_name,nt_verb,nt_adj,nt_adv};
 
     fill_NTrees(cat_trees);
+
 
 
     return 0;

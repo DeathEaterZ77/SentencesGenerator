@@ -20,7 +20,7 @@ typedef struct n_tree nt_tree, *np_tree;
 nt_tree createEmptyTree();
 
 
-// to implement functions
+// in order to implement functions
 void fill_NTrees(nt_tree*);
 void addWordToTree(char*, char*, char*, nt_tree*);
 

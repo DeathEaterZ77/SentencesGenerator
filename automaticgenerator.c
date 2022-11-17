@@ -94,7 +94,6 @@ pbase_node searchforNode(nt_tree tree, char* word){
 
 
 
-
 char* searchForFlexWord(nt_tree tree, int cat_val, char* form) {
     pbase_node pn = tree.root;
     while (1) {
@@ -127,7 +126,7 @@ char* searchForFlexWord(nt_tree tree, int cat_val, char* form) {
                             }
                         }
                     }
-                    else return flexnode->flech_word;
+                    else return flexnode->flech_word; // if it's an adverb
 
                     flexnode = flexnode->next;
                 }
@@ -135,12 +134,12 @@ char* searchForFlexWord(nt_tree tree, int cat_val, char* form) {
             }
         }
         int random;
-        if(pn->nbsons==0) return searchForFlexWord(tree, cat_val, form);
+        if(pn->nbsons==0) return searchForFlexWord(tree, cat_val, form); // recursive
         else {
-            random = rand() % pn->nbsons;
+            random = rand() % pn->nbsons; // random int between 0 and nbsons
             pn = pn->son;
             for (int i = 0; i < random; i++) {
-                pn = pn->sibling;
+                pn = pn->sibling; // go through his siblings
             }
         }
     }

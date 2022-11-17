@@ -21,7 +21,7 @@ int main(){
         } while (choice<1 || choice>3);
 
         switch (choice) {
-            case 1: { // find a word
+            case 1: { // in order to find a word
                 int cat = 0, end = 0;
 
                 do {

@@ -2,22 +2,25 @@
 #include "automaticgenerator.h"
 
 void generateSentence(int type, int model, nt_tree* cat_trees){
-    if(type==1)
+    if(type==1) // sentence with basic forms
     {
         if (model == 1) {
+            // noun - verb - adjective - noun
             printf("Your sentence is : %s %s %s %s\n\n", searchForBasicWord(cat_trees, 0, ""),
                    searchForBasicWord(cat_trees, 2, ""), searchForBasicWord(cat_trees, 1, ""),
                    searchForBasicWord(cat_trees, 0, ""));
         } else if (model == 2) {
+            // noun - qui - verb - verb - adjective - noun
             printf("Your sentence is : %s qui %s %s %s %s\n\n", searchForBasicWord(cat_trees, 0, ""),
                    searchForBasicWord(cat_trees, 1, ""), searchForBasicWord(cat_trees, 1, ""),
                    searchForBasicWord(cat_trees, 0, ""), searchForBasicWord(cat_trees, 2, ""));
         } else if (model == 3) {
+            // noun - adjective - verb - adjective - noun
             printf("Your sentence is : %s %s %s %s %s\n\n", searchForBasicWord(cat_trees, 0, ""),
                    searchForBasicWord(cat_trees, 2, ""), searchForBasicWord(cat_trees, 1, ""),
                    searchForBasicWord(cat_trees, 3, ""), searchForBasicWord(cat_trees, 0, ""));
         }
-    }else if(type==2){
+    }else if(type==2){ // sentence with inflexed forms
         char accords[4][2] = {"MS","FS","MP","FP"};
         char* choices = accords[rand()%4];
 
@@ -26,9 +29,9 @@ void generateSentence(int type, int model, nt_tree* cat_trees){
                searchForFlexWord(cat_trees[3], 3, choices));
 
         return;
-        printf("Your sentence is : %s %s %s %s\n\n", searchForFlexWord(cat_trees[0], 0, choices),
+        /* for full sentence : printf("Your sentence is : %s %s %s %s\n\n", searchForFlexWord(cat_trees[0], 0, choices),
                searchForFlexWord(cat_trees[2], 2, choices), searchForFlexWord(cat_trees[1], 1, choices),
-               searchForFlexWord(cat_trees[0], 0, choices));
+               searchForFlexWord(cat_trees[0], 0, choices)); */
     }
 }
 
@@ -36,20 +39,21 @@ char* searchForBasicWord(nt_tree* cat_trees, int cat_val, char* word) {
     char* new_word = (char*)malloc(100*sizeof(char));
     strcpy(new_word, word);
 
-    if(cat_val==4) {
+    // choose a random category
+    if(cat_val==4) { // user wants a random word
         int k=rand()%4;
         for (int i = 0; i < 4; i++) {
+            // recursive
             new_word = searchForBasicWord(cat_trees, k, word);
-            if(new_word!=NULL) return new_word;
+            if(new_word!=NULL) return new_word; // obtain a word
             k=(k+1)%4;
         }
-
-        return NULL;
+        return NULL; // if new_word is NULL
     }
-
+    // go through the tree to go to the node of the right basic form
     pbase_node pn;
     pn = searchforNode(cat_trees[cat_val], word);
-    if (pn == NULL || pn->son == NULL) return NULL;
+    if (pn == NULL || pn->son == NULL) return NULL; // if node is NULL or has no son
 
 
     while (1) {
@@ -58,27 +62,27 @@ char* searchForBasicWord(nt_tree* cat_trees, int cat_val, char* word) {
             //chose it or continue by random
             if ((rand() % 6 == 1) || pn->nbsons == 0) return new_word;
         }
-        int random = rand()%pn->nbsons;
+        int random = rand()%pn->nbsons; // random int between 0 and nbsons
         pn = pn->son;
         for(int i = 0; i<random; i++) {
-            pn = pn->sibling;
+            pn = pn->sibling; // go through his siblings
         }
-        strncat(new_word,&pn->letter, 1);
+        strncat(new_word,&pn->letter, 1); // concatenate the word with new letter
     }
 }
 
 pbase_node searchforNode(nt_tree tree, char* word){
     int i=0, search=0;
-    pbase_node here = tree.root;
+    pbase_node here = tree.root; // initialize to begin at the root
     pbase_node temp;
 
-    if(word == NULL)return tree.root;
+    if(word == NULL)return tree.root; // return to the tree to search at random
     while(word[i] != '\0'){
         temp = here->son;
         search=0;
         while(search==0){
-            if (temp->letter == word[i]) search = 1;
-            else if (temp->sibling != NULL) temp = temp->sibling;
+            if (temp->letter == word[i]) search = 1; // letter we searched for
+            else if (temp->sibling != NULL) temp = temp->sibling; // go through his siblings
             else return NULL;
         }
         here = temp;

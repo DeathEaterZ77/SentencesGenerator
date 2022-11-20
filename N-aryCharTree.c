@@ -13,8 +13,11 @@ nt_tree createEmptyTree(){
 
 void fill_NTrees( nt_tree* cat_trees ){
 
-    FILE* dico = fopen("../dictionnaire_non_accentue.txt","r"); // open the file
-    if (dico == NULL) exit(-1);
+    FILE* dico = fopen("dictionnaire_non_accentue.txt","r"); // open the file
+    if (dico == NULL){
+        dico = fopen("../dictionnaire_non_accentue.txt","r"); // open the file
+        if (dico == NULL)exit(-1);
+    }
 
     char basic_form[100], flech_form[100], infos[100];
 
@@ -51,14 +54,14 @@ void addWordToTree(char* basic_form, char* flech_form, char* gender_nbr_time, nt
             here = here->son;
         }
         else {
-            // if not we add the new node to the sibling
+            // if not we search the right node through the siblings
             search = 0;
             while (search == 0) {
-                if (temp->letter == basic_form[i]) search = 1;
+                if (temp->letter == basic_form[i]) search = 1; // if we found it
                 else if (temp->sibling != NULL) temp = temp->sibling;
                 else search = -1;
             }
-            if (search == -1) {
+            if (search == -1) { // if we didn't find, we add a new node to the last sibling
                 addNode(temp, basic_form[i], 0);
                 temp=temp->sibling;
                 here->nbsons++;
@@ -67,13 +70,9 @@ void addWordToTree(char* basic_form, char* flech_form, char* gender_nbr_time, nt
         }
         i++;
     }
-
-   // une fois avoir parcouru tous les caractères, on met le end du noeud actuel à 1 (car on est actuellement sur le dernier caractère)
-   //on ajoute les formes fléchies dans le noeud actuel (donc du dernier caractère) avec la fonction ("addFlechNode")
+    // we add the inflected form in the actual node, so to the last character of the basic form
     here->end=1;
     addFlechNode(here, flech_form, gender_nbr_time);
-
-
 }
 
 

@@ -1,5 +1,5 @@
- - Sentence Generator -
-s
+ - Sentences Generator -
+
 * Collaborators:
 	Carla Gros-Alcaraz
 	Charline Blanc

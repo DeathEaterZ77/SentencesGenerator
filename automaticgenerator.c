@@ -5,7 +5,7 @@ void generateSentence(int type, int model, nt_tree* cat_trees){
     if(type==1) // sentence with basic forms
     {
         if (model == 1) {
-            // noun - verb - adjective - noun
+            // noun - adjective -verb - noun
             printf("Your sentence is : %s %s %s %s\n\n", searchForBasicWord(cat_trees, 0, ""),
                    searchForBasicWord(cat_trees, 2, ""), searchForBasicWord(cat_trees, 1, ""),
                    searchForBasicWord(cat_trees, 0, ""));
@@ -15,23 +15,42 @@ void generateSentence(int type, int model, nt_tree* cat_trees){
                    searchForBasicWord(cat_trees, 1, ""), searchForBasicWord(cat_trees, 1, ""),
                    searchForBasicWord(cat_trees, 0, ""), searchForBasicWord(cat_trees, 2, ""));
         } else if (model == 3) {
-            // noun - adjective - verb - adjective - noun
+            // noun - adjective - verb - adverb - noun
             printf("Your sentence is : %s %s %s %s %s\n\n", searchForBasicWord(cat_trees, 0, ""),
                    searchForBasicWord(cat_trees, 2, ""), searchForBasicWord(cat_trees, 1, ""),
                    searchForBasicWord(cat_trees, 3, ""), searchForBasicWord(cat_trees, 0, ""));
         }
     }else if(type==2){ // sentence with inflexed forms
-        char accords[4][2] = {"MS","FS","MP","FP"};
-        char* choices = accords[rand()%4];
-
-        printf("Not implemented, but here are some random inflated words\n\tnoun : %s\n\tadjective : %s\n\tadverb : %s\n\n ",
-               searchForFlexWord(cat_trees[0], 0, choices),searchForFlexWord(cat_trees[2], 2, choices),
-               searchForFlexWord(cat_trees[3], 3, choices));
-
+        char accords[4][3] = {"MS","FS","MP","FP"};
+        char articles[4][4] = {"le","la","les","les"};
+        int i1 = rand()%4;
+        int i2 = rand()%4;
+        if (model == 1) {
+            // noun - adjective - verb - noun
+            printf("Your sentence is : (%s) %s %s %s (%s) %s.\n\n",
+                   articles[i1], searchForFlexWord(cat_trees[0], 0, accords[i1]), //noun
+                   searchForFlexWord(cat_trees[2], 2, accords[i1]), // adjective
+                   searchForFlexWord(cat_trees[1],1,accords[i1]), // verb
+                   articles[i2], searchForFlexWord(cat_trees[0],0,accords[i2])); // noun
+        } else if (model == 2) {
+            // noun - qui - verb - verb - noun - adjective
+            printf("Your sentence is : %s %s qui %s %s %s %s %s.\n\n",
+                   articles[i1], searchForFlexWord(cat_trees[0], 0, accords[i1]), // noun
+                   // qui
+                   searchForFlexWord(cat_trees[1], 1, accords[i1]), // verb
+                   searchForFlexWord(cat_trees[1],1,accords[i1]), // verb
+                   articles[i2], searchForFlexWord(cat_trees[0],0,accords[i2]), // noun
+                   searchForFlexWord(cat_trees[2],2,accords[i2])); // adjective
+        }else if (model == 3) {
+            // noun - adjective - verb - adverb - noun
+            printf("Your sentence is : %s %s %s %s %s %s %s.\n\n",
+                   articles[i1], searchForFlexWord(cat_trees[0], 0, accords[i1]), // noun
+                   searchForFlexWord(cat_trees[2],2,accords[i1]), // adjective
+                   searchForFlexWord(cat_trees[1], 1, accords[i1]), // verb
+                   searchForFlexWord(cat_trees[3], 3, accords[i1]), // adverb
+                   articles[i2], searchForFlexWord(cat_trees[0],0,accords[i2])); // noun
+        }
         return;
-        /* for full sentence : printf("Your sentence is : %s %s %s %s\n\n", searchForFlexWord(cat_trees[0], 0, choices),
-               searchForFlexWord(cat_trees[2], 2, choices), searchForFlexWord(cat_trees[1], 1, choices),
-               searchForFlexWord(cat_trees[0], 0, choices)); */
     }
 }
 
@@ -76,7 +95,7 @@ pbase_node searchforNode(nt_tree tree, char* word){
     pbase_node here = tree.root; // initialize to begin at the root
     pbase_node temp;
 
-    if(word == NULL)return tree.root; // return to the tree to search at random
+    if(word == NULL)return tree.root; // return the root tree to search at random
     while(word[i] != '\0'){
         temp = here->son;
         search=0;
@@ -108,9 +127,9 @@ char* searchForFlexWord(nt_tree tree, int cat_val, char* form) {
                     if(cat_val == 0 || cat_val == 2) {
                         // we need to separate the components
                         char *temp = strtok(flexnode->attributs, "+"); // get the gender
-                        if (temp[0] == form[0] || temp[0] == 'I') {//if the gender is the same (or indifferent)
+                        if (temp!=NULL && (temp[0] == form[0] || temp[0] == 'I')) {//if the gender is the same (or indifferent)
                             temp = strtok(NULL, "+"); // get the number
-                            if (temp[0] == form[1] || temp[0] == 'I') { // if the number is the same
+                            if (temp!=NULL && (temp[0] == form[1] || temp[0] == 'I')) { // if the number is the same
                                 return flexnode->flech_word;
                             }
                         }

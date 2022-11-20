@@ -37,7 +37,7 @@ int main(){
                 if (end == 2)printf("Your word is : %s\n", searchForBasicWord(cat_trees, cat-1, ""));
                 else {
                     char *word = (char *) malloc(50 * sizeof(char));
-                    printf("Enter the beginning of the word you want to find the end:");
+                    printf("Enter the beginning of the word you want to find the end: ");
                     scanf("%s", word);
                     printf("The full word is : %s\n\n", searchForBasicWord(cat_trees, cat - 1, word));
                 }
@@ -47,12 +47,12 @@ int main(){
             case 2: { // generate basic forms sentence
                 int type,model=1;
                 do {
-                    printf("Do you want a sentence with :\n\t1- basic forms\n\t2- inflated forms\n");
+                    printf("Do you want a sentence with :\n\t1- basic forms\n\t2- inflected forms\n");
                     scanf("%d", &type);
                 } while (type<1||type>2);
 
 
-                if(type==1)do {
+                do {
                     printf("Which model of sentence do you want to generate ?"
                            "\n\t1- noun - adjective - verb - noun\n\t2- noun - qui - verb - verb - noun - adjective\n\t3- noun - adjective - verb - adverb - noun\n");
                     scanf("%d", &model);
